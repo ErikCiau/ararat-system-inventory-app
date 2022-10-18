@@ -1,0 +1,12 @@
+<div class="overflow-auto w-full">
+  <table class="table table-zebra w-full text-center">
+    <thead>
+      <tr>
+        <th *ngFor="let head of titles">{{ head }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-content></ng-content>
+    </tbody>
+  </table>
+</div>
