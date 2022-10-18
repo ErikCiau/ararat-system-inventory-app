@@ -1,0 +1,62 @@
+
+
+<section id="products" class="mt-4">
+  <div class="mb-4 flex items-center justify-between">
+    <h2 class="font-black text-3xl">Productos</h2>
+    <div class="flex flex-row gap-1 items-center">
+      <input type="text" placeholder="Buscar" class="input input-bordered w-full max-w-xs" />
+      <button class="btn btn-primary" for="modal-product-creator">Agregar</button>
+    </div>
+  </div>
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let product of products">
+      <th>
+        <span class="block font-bold text-base">1</span>
+      </th>
+      <th class="overflow-scroll">
+        <span class="inline-block w-28 font-normal text-base">
+          {{ product.name }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ product.description }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ product.price | currency }}
+        </span>
+      </th>
+      <th class="text-center">
+        <span class="block font-normal text-base">
+          {{ product.variants.length || [] }}
+        </span>
+        <a class="btn btn-secondary btn-xs" [routerLink]="['/products/', product.id]">
+          Ver
+        </a>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ product.supplier.name }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ product.createdAt | date: "short" }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ product.updatedAt | date: "short" }}
+        </span>
+      </th>
+      <th>
+        <div class="flex flex-row flex-nowrap gap-1">
+          <button class="btn btn-warning btn-xs">Editar</button>
+          <button class="btn btn-accent btn-xs">Eliminar</button>
+        </div>
+      </th>
+    </tr>
+  </app-table>
+</section>
