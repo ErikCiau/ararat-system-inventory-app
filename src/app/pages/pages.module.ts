@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms'
 import { ProductService } from '../core/products/services/product.service';
 import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
+import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductComponent } from './products/products.component';
 
@@ -18,10 +20,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [PagesComponent, ProductComponent, ProductViewComponent],
+  declarations: [
+    PagesComponent,
+    ProductComponent,
+    ProductViewComponent,
+    ProductCreatorComponent
+  ],
   imports: [
     RouterModule.forChild(routes),
     HttpClientModule,
+    ReactiveFormsModule,
     SharedModule,
     CommonModule,
   ],
