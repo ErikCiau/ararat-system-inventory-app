@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
+import { SuppliersResolver } from "src/app/core/suppliers/resolvers/suppliers.resolver";
 import { ProductCreatorComponent } from "./product-creator.component";
 
 @NgModule({
@@ -7,6 +8,9 @@ import { ProductCreatorComponent } from "./product-creator.component";
     {
       path: '',
       component: ProductCreatorComponent,
+      resolve: {
+        suppliers: SuppliersResolver
+      }
     },
   ]),
   ]
