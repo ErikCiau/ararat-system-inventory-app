@@ -1,1 +1,116 @@
-<p>Products creator</p>
+<section id="product-creator" class="mt-4">
+  <div class="mb-2 lg:mb-4 flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4">
+    <h2 class="font-black text-xl lg:text-3xl">Agregar nuevo producto</h2>
+    <div class="space-x-2">
+      <button class="btn btn-sm lg:btn-md btn-error" routerLink="/products">Cancelar</button>
+      <button class="btn btn-sm lg:btn-md btn-primary" (click)="submitForm()" [ngClass]="{'animate-pulse': !isDisableButton}"
+        [disabled]="isDisableButton">Agregar</button>
+    </div>
+  </div>
+  <div class="flex flex-col lg:flex-row gap-4">
+
+    <form class="w-full shadow-xl bg-base-100 p-4 rounded-box max-w-3xl">
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Nombre del producto</span>
+          <span class="label-text-alt">Ej: Pantalon Levis</span>
+        </label>
+        <input type="text" placeholder="Producto" [formControl]="name" class="input input-bordered w-full" />
+        <label class="label" *ngIf="name.getError('required')">
+          <span class="label-text-alt text-red-600">El nombre es requerido*</span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Precio del producto</span>
+          <span class="label-text-alt">Ej: $300</span>
+        </label>
+        <label class="input-group">
+          <span>$</span>
+          <input type="number" value="0" min="0" placeholder="Precio" [formControl]="price"
+            class="input input-bordered w-full" />
+          <span>MXN</span>
+        </label>
+        <label class="label" *ngIf="price.getError('required') || price.getError('min')">
+          <span class="label-text-alt text-red-600">El precio es requerido y debe ser mayor a $1.00mxn*</span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Proveedor del producto</span>
+          <span class="label-text-alt">Ej: Levis</span>
+        </label>
+        <select class="select select-bordered w-full" [formControl]="supplier">
+          <option disabled selected>Seleccione</option>
+          <option *ngFor="let supplier of suppliers; index as i; trackBy: trackByIndex" [value]="supplier.id">
+            {{ supplier.name }}
+          </option>
+        </select>
+        <label class="label" *ngIf="supplier.getError('pattern')">
+          <span class="label-text-alt text-red-600">El proveedor es requerido*</span>
+        </label>
+      </div>
+    </form>
+  </div>
+
+  <div class="w-full my-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <!-- Modo activo -->
+    <div *ngFor="let formVariant of variantForms; index as i; trackBy: trackByIndex"
+      class="p-4 w-full bg-base-100 shadow-lg h-auto rounded-box">
+      <form [formGroup]="formVariant">
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Descripcion</span>
+            <span class="label-text-alt">Ej: Rojo Mezclilla</span>
+          </label>
+          <input type="text" placeholder="Descripcion" formControlName="description"
+            class="input input-bordered w-full" />
+          <label class="label">
+            <span class="label-text-alt text-slate-500">Opcional</span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Selecciona una talla</span>
+            <span class="label-text-alt">Ej: XL</span>
+          </label>
+          <select class="select select-bordered" formControlName="size">
+            <option disabled selected>Selecciona</option>
+            <option value="1">XL</option>
+          </select>
+          <label class="label" *ngIf="indexVariantForm(i).get('size')?.getError('required')">
+            <span class="label-text-alt text-red-600">La talla es requerida*</span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Cantidad</span>
+            <span class="label-text-alt">Ej: 20 unidades</span>
+          </label>
+          <label class="input-group">
+            <input type="number" value="1" min="1" placeholder="Cantidad" formControlName="quantity"
+              class="input input-bordered w-full" />
+            <span>Unidades</span>
+          </label>
+          <label class="label"
+            *ngIf="indexVariantForm(i).get('quantity')?.getError('required') || indexVariantForm(i).get('quantity')?.getError('min')">
+            <span class="label-text-alt text-red-600">La cantidad es requerida y tiene que ser mayor a 1*</span>
+          </label>
+        </div>
+      </form>
+      <button class="btn btn-error mt-3" (click)="deleteVariantForm(i)">Eliminar</button>
+    </div>
+
+    <!-- Modo inactico -->
+    <div class="p-0 w-full bg-base-200 hover:bg-base-100 h-auto rounded-box flex flex-col justify-center items-center">
+      <button class="btn btn-ghost h-full w-full" (click)="addVariantForm()">
+        <span class="text-xl font-thin">Agregar variante</span>
+      </button>
+    </div>
+  </div>
+
+</section>
