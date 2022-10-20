@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, retry } from 'rxjs';
 import { IProductResponse } from '../interfaces/product.interface';
 import { IVariantResponse } from '../interfaces/product-variant.interface';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProductService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll() {
     return this.http
@@ -18,6 +18,11 @@ export class ProductService {
           throw err;
         })
       );
+  }
+
+  createProduct(product: any) {
+    return this.http
+      .post<IProductResponse>(`${environment.apiBase}/products`, product)
   }
 
   productById(id: string) {
