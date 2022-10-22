@@ -9,11 +9,12 @@ import { IProductResponse } from 'src/app/core/products/interfaces/product.inter
   selector: 'app-product-view',
 })
 export class ProductViewComponent implements OnInit {
-  public product: Partial<IProductResponse> = {};
-  public variantProduct: IVariantResponse[] = [];
+  public product!: Partial<IProductResponse>;
+  public variantProduct!: IVariantResponse[];
+  public productId!: string
 
-  constructor(private activadedRoute: ActivatedRoute,
-
+  constructor(
+    private activadedRoute: ActivatedRoute
   ) { }
 
   public ngOnInit(): void {
@@ -21,9 +22,13 @@ export class ProductViewComponent implements OnInit {
       this.product = product;
       this.variantProduct = variants;
     });
+    this.activadedRoute.paramMap.subscribe(params => {
+      this.productId = params.get('id') as string
+    })
   }
 
-  public enableModal() {
-
+  get toAddVariantForm(): string {
+    return `/products/${this.productId}/variants/creator`
   }
+
 }

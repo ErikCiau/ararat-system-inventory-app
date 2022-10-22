@@ -10,6 +10,7 @@ import { ProductCreatorComponent } from './product-creator/product-creator.compo
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductComponent } from './products/products.component';
 import { SupplierComponent } from './suppliers/supplier.component';
+import { ProductVariantCreatorComponent } from './product-variant-creator/product-variant-creator.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
     ProductViewComponent,
     ProductCreatorComponent,
     SupplierComponent,
+    ProductVariantCreatorComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

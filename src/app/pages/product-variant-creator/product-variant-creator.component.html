@@ -1,1 +1,68 @@
-<p>product variant creator its works</p>
+<section id="product-variant-creator" class="mt-4">
+  <div class="mb-2 lg:mb-4 flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4">
+    <h2 class="font-black text-xl lg:text-3xl">Agregar variante(s)</h2>
+    <div class="space-x-2">
+      <button class="btn btn-sm lg:btn-md btn-error" [routerLink]="'/products/'+ productId">Cancelar</button>
+      <button class="btn btn-sm lg:btn-md btn-primary" [ngClass]="{'animate-pulse' : isValidForm}"
+        [disabled]="!isValidForm" (click)="submitVariantForm()">Agregar</button>
+    </div>
+  </div>
+
+  <div class="w-full my-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+    <!-- Modo activo -->
+
+    <div *ngFor="let variantForm of variantsForm; index as i; trackBy: trackByIndex" class="p-4 w-full bg-base-100 shadow-lg h-auto rounded-box">
+      <form [formGroup]="variantForm">
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Descripcion</span>
+            <span class="label-text-alt">Ej: Rojo Mezclilla</span>
+          </label>
+          <input type="text" placeholder="Descripcion" formControlName="description" class="input input-bordered w-full"/>
+          <label class="label" >
+            <span class="label-text-alt text-slate-500">Opcional</span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Selecciona una talla</span>
+            <span class="label-text-alt">Ej: XL</span>
+          </label>
+          <select class="select select-bordered" formControlName="size">
+            <option disabled selected>Selecciona</option>
+            <option value="1">XL</option>
+          </select>
+          <label class="label" *ngIf="indexVariantForm(i).get('size')?.getError('required') || indexVariantForm(i).get('size')?.getError('pattern')">
+            <span class="label-text-alt text-red-600">La talla es requerida*</span>
+          </label>
+        </div>
+
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Cantidad</span>
+            <span class="label-text-alt">Ej: 20 unidades</span>
+          </label>
+          <label class="input-group">
+            <input type="number" value="1" min="1" placeholder="Cantidad" formControlName="quantity" class="input input-bordered w-full" />
+            <span>Unidades</span>
+          </label>
+          <label class="label" *ngIf="indexVariantForm(i).get('quantity')?.getError('required') || indexVariantForm(i).get('quantity')?.getError('min')">
+            <span class="label-text-alt text-red-600">La cantidad es requerida y tiene que ser mayor a 1*</span>
+          </label>
+        </div>
+      </form>
+      <button class="btn btn-error mt-3" [disabled]="sizeVariantForm <= 1" (click)="removeVariantForm(i)">Eliminar</button>
+    </div>
+
+    <!-- Modo inactivo -->
+
+    <div class="p-0 w-full bg-base-200 hover:bg-base-100 h-auto rounded-box flex flex-col justify-center items-center">
+      <button class="btn btn-ghost h-full w-full" (click)="addVariantForm()">
+        <span class="text-xl font-thin">Agregar variante</span>
+      </button>
+    </div>
+  </div>
+
+</section>

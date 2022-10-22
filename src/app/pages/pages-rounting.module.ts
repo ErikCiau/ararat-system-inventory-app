@@ -27,7 +27,7 @@ import { RouterModule } from '@angular/router';
           ),
       },
       {
-        path: 'products/:id/creator',
+        path: 'products/:id/variants/creator',
         loadChildren: () =>
           import('./product-variant-creator/product-variant-creator-rounting.module').then(
             (m) => m.ProductVariantCreatorRountingModule
