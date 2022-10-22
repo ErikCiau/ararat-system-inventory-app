@@ -33,6 +33,12 @@ import { RouterModule } from '@angular/router';
             (m) => m.ProductVariantCreatorRountingModule
           ),
       },
+      {
+        path: 'suppliers',
+        loadChildren: () => import('./suppliers/supplier-routing.module').then(
+          (m) => m.SupplierRountingModule
+        )
+      }
     ]),
   ],
   declarations: [],

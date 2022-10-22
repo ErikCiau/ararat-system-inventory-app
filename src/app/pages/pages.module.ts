@@ -9,6 +9,7 @@ import { PagesComponent } from './pages.component';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductComponent } from './products/products.component';
+import { SupplierComponent } from './suppliers/supplier.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
     PagesComponent,
     ProductComponent,
     ProductViewComponent,
-    ProductCreatorComponent
+    ProductCreatorComponent,
+    SupplierComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

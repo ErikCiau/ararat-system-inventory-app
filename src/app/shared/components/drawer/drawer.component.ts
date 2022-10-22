@@ -12,7 +12,7 @@ export class DrawerComponent implements OnInit {
   public routerPages: DrawerSideIcon[] = [
     new DrawerSideIcon('/', 'Dashboard', 'graph-up'),
     new DrawerSideIcon('/products', 'Productos', 'task-list'),
-    new DrawerSideIcon('/', 'Proveedores', 'providers'),
+    new DrawerSideIcon('/suppliers', 'Proveedores', 'providers'),
     new DrawerSideIcon('/', 'Empleados', 'employees'),
     new DrawerSideIcon('/', 'Pedidos', 'orders'),
     new DrawerSideIcon('/', 'Clientes', 'clients'),
