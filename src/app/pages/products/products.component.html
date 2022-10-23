@@ -1,5 +1,3 @@
-
-
 <section id="products" class="mt-4">
   <div class="mb-4 flex items-center justify-between">
     <h2 class="font-black text-3xl">Productos</h2>
@@ -53,7 +51,7 @@
       </th>
       <th>
         <div class="flex flex-row flex-nowrap gap-1">
-          <button class="btn btn-warning btn-xs">Editar</button>
+          <button class="btn btn-warning btn-xs" (click)="openDialog(product)">Editar</button>
           <button class="btn btn-accent btn-xs">Eliminar</button>
         </div>
       </th>

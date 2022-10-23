@@ -1,0 +1,50 @@
+<div class="modal modal-open">
+  <div class="modal-box w-11/12 max-w-xl">
+    <h3 class="font-bold text-lg">Editar producto</h3>
+    <form>
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Nombre del producto</span>
+          <span class="label-text-alt">Ej: Pantalon Levis</span>
+        </label>
+        <input type="text" placeholder="Producto" [formControl]="name" class="input input-bordered w-full" />
+        <label class="label" *ngIf="name.getError('required')">
+          <span class="label-text-alt text-red-600">El nombre es requerido*</span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Precio del producto</span>
+          <span class="label-text-alt">Ej: $300</span>
+        </label>
+        <label class="input-group">
+          <span>$</span>
+          <input type="number" [formControl]="price" min="0" placeholder="Precio" class="input input-bordered w-full" />
+          <span>MXN</span>
+        </label>
+        <label class="label" *ngIf="price.getError('required') || price.getError('min')">
+          <span class="label-text-alt text-red-600">El precio es requerido y debe ser mayor a $1.00mxn*</span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Proveedor del producto</span>
+          <span class="label-text-alt">Ej: Levis</span>
+        </label>
+        <select class="select select-bordered w-full" [formControl]="supplier">
+          <option disabled>Seleccione</option>
+          <option *ngFor="let supplierData of suppliers">{{supplierData.name}}</option>
+        </select>
+        <label class="label" *ngIf="supplier.getError('required')">
+          <span class="label-text-alt text-red-600">El proveedor es requerido*</span>
+        </label>
+      </div>
+    </form>
+    <div class="modal-action">
+      <button class="btn btn-error" (click)="closeDialog('cancel')">Cancelar</button>
+      <button class="btn btn-success" [disabled]="!isValidForm" (click)="onSubmit()">Guardar</button>
+    </div>
+  </div>
+</div>

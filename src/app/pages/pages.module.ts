@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ProductService } from '../core/products/services/product.service';
 import { SharedModule } from '../shared/shared.module';
 import { PagesComponent } from './pages.component';
@@ -11,6 +11,9 @@ import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductComponent } from './products/products.component';
 import { SupplierComponent } from './suppliers/supplier.component';
 import { ProductVariantCreatorComponent } from './product-variant-creator/product-variant-creator.component';
+
+import { DialogModule } from '@angular/cdk/dialog'
+import { ProductDialogEditorComponent } from './products/internal/product-dialog-editor.component';
 
 const routes: Routes = [
   {
@@ -29,13 +32,16 @@ const routes: Routes = [
     ProductCreatorComponent,
     SupplierComponent,
     ProductVariantCreatorComponent,
+    ProductDialogEditorComponent
   ],
   imports: [
     RouterModule.forChild(routes),
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     SharedModule,
     CommonModule,
+    DialogModule,
   ],
   providers: [ProductService],
   exports: [],
