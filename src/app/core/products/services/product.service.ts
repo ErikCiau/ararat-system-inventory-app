@@ -57,4 +57,13 @@ export class ProductService {
       })
     )
   }
+
+  deleteProduct(productId: string) {
+    return this.http.delete<void>(`${environment.apiBase}/products/${productId}`).pipe(
+      retry(1),
+      catchError(err => {
+        throw err
+      })
+    )
+  }
 }
