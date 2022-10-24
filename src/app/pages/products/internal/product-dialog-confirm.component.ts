@@ -39,7 +39,7 @@ export class ProductDialogConfirmComponent implements OnInit {
   }
 
   public confirmDialog() {
-    this.productService.deleteProduct(this.product.id).subscribe(() => {
+    this.productService.deleteProduct(this.product.id, !this.product.active).subscribe(() => {
       this.closeDialog('success')
     })
   }
