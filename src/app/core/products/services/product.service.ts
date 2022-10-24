@@ -48,4 +48,13 @@ export class ProductService {
         })
       );
   }
+
+  updateProductInfo(productId: string, productInfo: { name: string, price: number, supplier: string }) {
+    return this.http.put<void>(`${environment.apiBase}/products/${productId}`, productInfo).pipe(
+      retry(1),
+      catchError(err => {
+        throw err
+      })
+    )
+  }
 }
