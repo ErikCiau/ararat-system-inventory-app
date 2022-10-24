@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
     'Precio',
     'Variantes',
     'Proveedor',
+    'Estado',
     'Creado',
     'Actualizado',
     'Opciones',
@@ -60,6 +61,10 @@ export class ProductComponent implements OnInit {
         this.reloadResolver()
       }
     })
+  }
+
+  public trackByIndex(index: number) {
+    return index
   }
 
   private async reloadResolver() {
