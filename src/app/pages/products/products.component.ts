@@ -42,7 +42,6 @@ export class ProductComponent implements OnInit {
       }
     })
     dialog.closed.subscribe(event => {
-      console.log(event)
       if (event === 'success') {
         this.reloadResolver()
       }
@@ -51,8 +50,6 @@ export class ProductComponent implements OnInit {
 
   private async reloadResolver() {
     this.router.navigated = false
-    this.router.navigate([this.router.url]).then(() => {
-      this.products = this.activatedRoute.snapshot.data['products'] as IProductResponse[]
-    })
+    this.router.navigate([this.activatedRoute.parent?.url])
   }
 }

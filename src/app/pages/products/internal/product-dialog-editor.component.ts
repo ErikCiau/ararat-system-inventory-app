@@ -2,6 +2,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { IProductResponse } from "src/app/core/products/interfaces/product.interface";
+import { ProductService } from 'src/app/core/products/services/product.service';
 import { ISupplierResponse } from 'src/app/core/suppliers/interfaces/supplier-response.interface';
 import { SupplierService } from 'src/app/core/suppliers/services/supplier.service';
 
@@ -18,6 +19,7 @@ export class ProductDialogEditorComponent implements OnInit {
     private dialogRef: DialogRef,
     private formBuilder: FormBuilder,
     private supplierService: SupplierService,
+    private productService: ProductService,
   ) { }
 
   public ngOnInit(): void {
@@ -30,8 +32,10 @@ export class ProductDialogEditorComponent implements OnInit {
     this.productEditorForm = this.formBuilder.group({
       name: this.formBuilder.control(this.product.name, [Validators.required]),
       price: this.formBuilder.control(this.product.price, [Validators.required, Validators.min(1)]),
-      supplier: this.formBuilder.control(this.product.id, [Validators.required])
+      supplier: this.formBuilder.control(this.product.supplier.id, [Validators.required])
     })
+    console.log(this.productEditorForm.value)
+    this.productEditorForm.valueChanges.subscribe(console.log)
   }
 
   get name() {
@@ -49,7 +53,14 @@ export class ProductDialogEditorComponent implements OnInit {
 
   public onSubmit() {
     if (!this.isValidForm) return
-    this.closeDialog('success')
+    console.log(this.productEditorForm.value)
+    this.productService.updateProductInfo(this.product.id, {
+      name: this.name.getRawValue(),
+      price: this.price.getRawValue(),
+      supplier: this.supplier.getRawValue().toString()
+    }).subscribe(() => {
+      this.closeDialog('success')
+    })
   }
   public closeDialog(event: 'success' | 'cancel') {
     this.dialogRef.close(event)

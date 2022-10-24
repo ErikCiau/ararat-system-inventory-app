@@ -9,6 +9,7 @@ import { ProductsResolve } from '../../core/products/resolvers/products.resolve'
       {
         path: '',
         component: ProductComponent,
+        runGuardsAndResolvers: 'always',
         resolve: {
           products: ProductsResolve,
         },

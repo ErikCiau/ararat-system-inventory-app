@@ -35,7 +35,7 @@
         </label>
         <select class="select select-bordered w-full" [formControl]="supplier">
           <option disabled>Seleccione</option>
-          <option *ngFor="let supplierData of suppliers">{{supplierData.name}}</option>
+          <option *ngFor="let supplierData of suppliers" [value]="supplierData.id">{{supplierData.name}}</option>
         </select>
         <label class="label" *ngIf="supplier.getError('required')">
           <span class="label-text-alt text-red-600">El proveedor es requerido*</span>
