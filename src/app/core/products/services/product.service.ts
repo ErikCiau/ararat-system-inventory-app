@@ -58,8 +58,12 @@ export class ProductService {
     )
   }
 
-  deleteProduct(productId: string) {
-    return this.http.delete<void>(`${environment.apiBase}/products/${productId}`).pipe(
+  deleteProduct(productId: string, newState: boolean) {
+    return this.http.delete<void>(`${environment.apiBase}/products/${productId}`, {
+      body: {
+        state: newState
+      }
+    }).pipe(
       retry(1),
       catchError(err => {
         throw err

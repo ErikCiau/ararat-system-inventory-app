@@ -6,6 +6,7 @@ export interface IProductResponse {
   name: string;
   price: number;
   supplier: Supplier;
+  active: boolean;
   updatedAt: Date;
   variants: Variant[];
 }
