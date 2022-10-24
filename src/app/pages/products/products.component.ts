@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProductResponse } from 'src/app/core/products/interfaces/product.interface';
 import { Dialog } from '@angular/cdk/dialog'
 import { ProductDialogEditorComponent } from './internal/product-dialog-editor.component';
+import { ProductDialogConfirmComponent } from './internal/product-dialog-confirm.component';
 
 @Component({
   templateUrl: './products.component.html',
@@ -37,6 +38,19 @@ export class ProductComponent implements OnInit {
 
   openDialog(product: IProductResponse) {
     const dialog = this.dialog.open<string>(ProductDialogEditorComponent, {
+      data: {
+        product
+      }
+    })
+    dialog.closed.subscribe(event => {
+      if (event === 'success') {
+        this.reloadResolver()
+      }
+    })
+  }
+
+  public openDeleteConfirmationDialog(product: IProductResponse) {
+    const dialog = this.dialog.open<string>(ProductDialogConfirmComponent, {
       data: {
         product
       }

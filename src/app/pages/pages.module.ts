@@ -14,6 +14,7 @@ import { ProductVariantCreatorComponent } from './product-variant-creator/produc
 
 import { DialogModule } from '@angular/cdk/dialog'
 import { ProductDialogEditorComponent } from './products/internal/product-dialog-editor.component';
+import { ProductDialogConfirmComponent } from './products/internal/product-dialog-confirm.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,8 @@ const routes: Routes = [
     ProductCreatorComponent,
     SupplierComponent,
     ProductVariantCreatorComponent,
-    ProductDialogEditorComponent
+    ProductDialogEditorComponent,
+    ProductDialogConfirmComponent
   ],
   imports: [
     RouterModule.forChild(routes),
