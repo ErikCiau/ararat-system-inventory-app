@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EnvironmentInjector, Injectable } from "@angular/core";
 import { catchError, retry } from "rxjs";
 import { environment } from 'src/environments/environment';
 import { ISupplierResponse } from "../interfaces/supplier-response.interface";
@@ -25,6 +25,16 @@ export class SupplierService {
         console.log(err)
         throw err
       })
+    )
+  }
+
+  editSupplier(supplierId: string, supplier: Partial<ISupplierResponse>) {
+    return this.network.put<void>(`${environment.apiBase}/suppliers/${supplierId}`, supplier).pipe(
+      retry(1),
+      catchError(err => {
+        console.log(err)
+        throw err
+      }),
     )
   }
 
