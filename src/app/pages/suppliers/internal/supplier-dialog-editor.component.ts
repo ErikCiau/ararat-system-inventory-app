@@ -1,7 +1,9 @@
 import { DialogRef } from "@angular/cdk/dialog";
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { Router } from "@angular/router";
 import { ISupplierResponse } from "src/app/core/suppliers/interfaces/supplier-response.interface";
+import { SupplierService } from "src/app/core/suppliers/services/supplier.service";
 
 @Component({
   templateUrl: './supplier-dialog-editor.component.html',
@@ -16,7 +18,8 @@ export class SupplierDialogEditorComponent implements OnInit {
   private supplierData!: ISupplierResponse
 
   constructor(
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef,
+    private supplierService: SupplierService,
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +34,9 @@ export class SupplierDialogEditorComponent implements OnInit {
 
   public submitSupplierForm(form: NgForm) {
     if (!form.valid) return
-    console.log(form.value)
-    this.closeDialog('success')
+    this.supplierService.editSupplier(String(this.supplierData.id), form.value).subscribe(
+      () => {
+        this.closeDialog('success')
+      })
   }
-
 }

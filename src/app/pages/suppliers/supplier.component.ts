@@ -1,6 +1,6 @@
 import { Dialog } from "@angular/cdk/dialog";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ISupplierResponse } from "src/app/core/suppliers/interfaces/supplier-response.interface";
 import { SupplierDialogEditorComponent } from "./internal/supplier-dialog-editor.component";
 
@@ -13,6 +13,7 @@ export class SupplierComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: Dialog,
+    private router: Router,
   ) { }
 
   public tableTitles: string[] = [
@@ -30,7 +31,6 @@ export class SupplierComponent implements OnInit {
     })
   }
 
-  // TODO: implement rerender resolvers
   public openDialogEditor(supplier: ISupplierResponse) {
     const dialog = this.dialog.open(SupplierDialogEditorComponent, {
       data: {
@@ -39,11 +39,18 @@ export class SupplierComponent implements OnInit {
     })
 
     dialog.closed.subscribe(event => {
-      console.log(event)
+      if (event === 'success') {
+        this.reloadResolver()
+      }
     })
   }
 
   public trackByIndex(i: number) {
     return i
+  }
+
+  private reloadResolver() {
+    this.router.navigated = false
+    this.router.navigate([this.activatedRoute.parent?.url])
   }
 }
