@@ -1,0 +1,39 @@
+<div class="modal modal-open">
+  <div class="modal-box w-11/12 max-w-xl">
+    <h3 class="font-bold text-lg">Editar proveedor</h3>
+
+    <form #form="ngForm" class="w-full">
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Proveedor</span>
+          <span class="label-text-alt">Ej: Ararat</span>
+        </label>
+        <input type="text" placeholder="Nombre del proveedor" class="input input-bordered w-full"
+          [(ngModel)]="supplierForm.name" name="name" #name="ngModel" required />
+        <label class="label" *ngIf="name.getError('required')">
+          <span class="label-text-alt text-error">El nombre es requerido</span>
+        </label>
+      </div>
+
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Contacto</span>
+        </label>
+        <input type="text" placeholder="Contacto del proveedor" class="input input-bordered w-full"
+          [(ngModel)]="supplierForm.contact" name="contact" #contact="ngModel" required minlength="10" maxlength="12" />
+        <label class="label" *ngIf="contact.getError('required') || contact.getError('minlength')">
+          <span *ngIf="contact.getError('required')" class="label-text-alt text-error">El contacto es requerido</span>
+          <span *ngIf="contact.getError('minlength') || contact.getError('maxlength')"
+            class="label-text-alt text-error">El
+            contacto no es valido</span>
+        </label>
+      </div>
+
+    </form>
+    <div class="modal-action">
+      <button class="btn btn-error" (click)="closeDialog('cancel')">Cancelar</button>
+      <button class="btn btn-success" (click)="submitSupplierForm(form)" [disabled]="!form.valid">Guardar</button>
+    </div>
+  </div>
+</div>
