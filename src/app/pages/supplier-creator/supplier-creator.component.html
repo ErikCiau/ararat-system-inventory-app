@@ -1,0 +1,41 @@
+<section id="supplier-creator" class="mt-4">
+  <div class="mb-2 lg:mb-4 flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4">
+    <h2 class="font-black text-xl lg:text-3xl">Agregar nuevo proveedor</h2>
+    <div class="space-x-2">
+      <button class="btn btn-sm lg:btn-md btn-error" routerLink="/suppliers">Cancelar</button>
+      <button class="btn btn-sm lg:btn-md btn-primary" [disabled]="!form.valid"
+        [ngClass]="{'animate-pulse': form.valid}" (click)="submitSupplierCreatorForm(form)">
+        Agregar
+      </button>
+    </div>
+  </div>
+  <form #form="ngForm" (ngSubmit)="submitSupplierCreatorForm(form)"
+    class="w-full shadow-xl bg-base-100 p-4 rounded-box max-w-3xl">
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Proveedor</span>
+        <span class="label-text-alt">Ej: Ararat</span>
+      </label>
+      <input type="text" placeholder="Nombre del proveedor" class="input input-bordered w-full"
+        [(ngModel)]="supplierForm.name" name="name" #name="ngModel" required />
+      <label class="label" *ngIf="name.getError('required')">
+        <span class="label-text-alt text-error">El nombre es requerido</span>
+      </label>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Contacto</span>
+      </label>
+      <input type="text" placeholder="Contacto del proveedor" class="input input-bordered w-full"
+        [(ngModel)]="supplierForm.contact" name="contact" #contact="ngModel" required minlength="10" maxlength="12" />
+      <label class="label">
+        <span *ngIf="contact.getError('required')" class="label-text-alt text-error">El contacto es requerido</span>
+        <span *ngIf="contact.getError('minlength') || contact.getError('maxlength')" class="label-text-alt text-error">El
+          contacto no es valido</span>
+      </label>
+    </div>
+
+  </form>
+</section>

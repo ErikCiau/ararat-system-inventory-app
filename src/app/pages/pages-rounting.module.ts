@@ -38,7 +38,13 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./suppliers/supplier-routing.module').then(
           (m) => m.SupplierRountingModule
         )
-      }
+      },
+      {
+        path: 'suppliers/creator',
+        loadChildren: () => import('./supplier-creator/supplier-creator-routing.module').then(
+          (m) => m.SupplierCreatorRoutingModule
+        )
+      },
     ]),
   ],
   declarations: [],
