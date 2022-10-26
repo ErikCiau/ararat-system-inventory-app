@@ -50,7 +50,13 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./employees/employees-rounting.module').then(
           (m) => m.EmployeesRountingModule
         )
-      }
+      },
+      {
+        path: 'employees/creator',
+        loadChildren: () => import('./employee-creator/employees-creator-routing.module').then(
+          (m) => m.EmployeeCreatorRountingModule
+        ),
+      },
     ]),
   ],
   declarations: [],
