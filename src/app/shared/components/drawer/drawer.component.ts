@@ -13,7 +13,7 @@ export class DrawerComponent implements OnInit {
     new DrawerSideIcon('/', 'Dashboard', 'graph-up'),
     new DrawerSideIcon('/products', 'Productos', 'task-list'),
     new DrawerSideIcon('/suppliers', 'Proveedores', 'providers'),
-    new DrawerSideIcon('/', 'Empleados', 'employees'),
+    new DrawerSideIcon('/employees', 'Empleados', 'employees'),
     new DrawerSideIcon('/', 'Pedidos', 'orders'),
     new DrawerSideIcon('/', 'Clientes', 'clients'),
   ];

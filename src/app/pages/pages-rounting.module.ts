@@ -45,6 +45,12 @@ import { RouterModule } from '@angular/router';
           (m) => m.SupplierCreatorRoutingModule
         )
       },
+      {
+        path: 'employees',
+        loadChildren: () => import('./employees/employees-rounting.module').then(
+          (m) => m.EmployeesRountingModule
+        )
+      }
     ]),
   ],
   declarations: [],

@@ -1,0 +1,52 @@
+<section id="employees" class="mt-4">
+  <div class="mb-4 flex items-center justify-between">
+    <h2 class="font-black text-3xl">Empleados</h2>
+    <div class="flex flex-row gap-1 items-center">
+      <input type="text" placeholder="Buscar" class="input input-bordered w-full max-w-xs" />
+      <a class="btn btn-primary" for="modal-product-creator" routerLink="/employees/creator">Agregar</a>
+    </div>
+  </div>
+
+  <app-table [titles]="tableTitles">
+    <tr *ngFor="let employee of employees; index as i; trackBy: trackByIndex">
+      <th>
+        <span>{{ i + 1 }}</span>
+      </th>
+      <th>
+        <span class="block font-medium text-base">
+          @{{ employee.username }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ employee.name }} {{ employee.lastname }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ employee.contact }}
+        </span>
+      </th>
+      <th>
+        <span class="badge badge-info">
+          {{ employee.role | uppercase }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ employee.createdAt | date:'short' }}
+        </span>
+      </th>
+      <th>
+        <span class="block font-normal text-base">
+          {{ employee.updatedAt | date:'short' }}
+        </span>
+      </th>
+      <th class="flex flex-row justify-center items-center gap-1">
+        <button class="btn btn-xs btn-warning">Editar</button>
+        <button class="btn btn-xs btn-error">Eliminar</button>
+      </th>
+    </tr>
+  </app-table>
+
+</section>

@@ -17,6 +17,7 @@ import { ProductDialogEditorComponent } from './products/internal/product-dialog
 import { ProductDialogConfirmComponent } from './products/internal/product-dialog-confirm.component';
 import { SupplierCreatorComponent } from './supplier-creator/supplier-creator.component';
 import { SupplierDialogEditorComponent } from './suppliers/internal/supplier-dialog-editor.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     ProductDialogConfirmComponent,
     SupplierCreatorComponent,
     SupplierDialogEditorComponent,
+    EmployeesComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
