@@ -1,1 +1,61 @@
-<p>Employees creator its works</p>
+<section id="employee-creator" class="mt-4">
+  <div class="mb-2 lg:mb-4 flex flex-col lg:flex-row lg:justify-between items-start lg:items-center gap-4">
+    <h2 class="font-black text-xl lg:text-3xl">Registrar nuevo empleado</h2>
+    <div class="space-x-2">
+      <button class="btn btn-sm lg:btn-md btn-error" routerLink="/employees">Cancelar</button>
+      <button class="btn btn-sm lg:btn-md btn-primary" [disabled]="form.invalid" [ngClass]="{'animate-pulse': form.valid }" (click)="submitEmployeeCreatorForm(form)">
+        <label>Registrar</label>
+      </button>
+    </div>
+  </div>
+
+  <form #form="ngForm" class="w-full shadow-xl bg-base-100 p-4 rounded-box max-w-3xl">
+    <div class="flex flex-col md:flex-row flex-nowrap gap-0 md:gap-2">
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Nombre(s)</span>
+          <span class="label-text-alt">Ej: Erik Antonio</span>
+        </label>
+        <input type="text" placeholder="Nombre(s)" [(ngModel)]="employeeForm.name" name="name" #name="ngModel" required class="input input-bordered w-full placeholder:text-base-300" />
+        <label class="label" *ngIf="name.getError('required')">
+          <span class="label-text-alt text-error">El nombre es requerido*</span>
+        </label>
+      </div>
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Apellido(s)</span>
+          <span class="label-text-alt">Ej: Ciau Gómez</span>
+        </label>
+        <input type="text" placeholder="Apellido(s)" [(ngModel)]="employeeForm.lastname" name="lastname" #lastname="ngModel" required class="input input-bordered w-full placeholder:text-base-300" />
+        <label class="label" *ngIf="lastname.getError('required')">
+          <span class="label-text-alt text-error">El apellido es requerido*</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Contacto</span>
+        <span class="label-text-alt">Ej: 9881055192</span>
+      </label>
+      <input type="text" placeholder="Contacto" [(ngModel)]="employeeForm.contact" name="contact" #contact="ngModel" required minlength="10" maxlength="12" class="input input-bordered w-full placeholder:text-base-300" />
+      <label class="label" *ngIf="contact.getError('required') || contact.getError('minlength')">
+        <span class="label-text-alt text-error" *ngIf="contact.getError('required')">El contacto es requerido*</span>
+        <span class="label-text-alt text-error" *ngIf="contact.getError('minlength')">El no es un numero valido*</span>
+      </label>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text">Contraseña</span>
+      </label>
+      <input type="text" placeholder="Contraseña" [(ngModel)]="employeeForm.password" name="password" #password="ngModel" required minlength="8" class="input input-bordered w-full placeholder:text-base-300" />
+      <label class="label" *ngIf="password.getError('required') || password.getError('minlength')">
+        <span class="label-text-alt text-error" *ngIf="password.getError('required')">La contraseña es requerido*</span>
+        <span class="label-text-alt text-error" *ngIf="password.getError('minlength')">La contraseña no es valida*</span>
+      </label>
+    </div>
+
+  </form>
+
+</section>
