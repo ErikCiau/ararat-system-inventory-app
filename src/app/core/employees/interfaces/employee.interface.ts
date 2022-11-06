@@ -8,3 +8,5 @@ export interface IEmployeeResponse {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type IRegisterEmployee = Partial<IEmployeeResponse>
